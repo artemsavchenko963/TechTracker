@@ -158,6 +158,6 @@ body {
 .btn:hover {
     background: #fff;
     cursor: pointer;
-    padding: .8rem 3rem;
+    padding: .8rem 4rem;
     transition: .3s;
 }
