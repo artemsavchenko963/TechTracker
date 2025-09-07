@@ -3,6 +3,7 @@
     --orange: #ff6a00;
     --red: #ff0000;
     --border: 1px solid rgba(0, 0, 0, 0.095);
+    --borderbold: 2px solid rgba(0, 0, 0, 0.454);
     --radius: 6px;
     --border-color: black;
 }
@@ -52,7 +53,7 @@ body {
     border: var(--border);
 }
 
-.card .done {
+.card.done {
     background: var(--green);
     color: #fff;
 }
@@ -90,7 +91,7 @@ body {
     display: none;
 }
 
-.model.open {
+.modal.open {
     display: block;
     position: fixed;
     top: 50px;
@@ -100,6 +101,7 @@ body {
     background: #fff;
     z-index: 200;
     padding: 1.5rem;
+    border: var(--borderbold);
     border-radius: var(--radius);
 }
 
@@ -115,15 +117,22 @@ body {
     background: var(--border-color);
 }
 
-.model.open+.modal-backdrop {
+.modal.open+.modal-backdrop {
     display: block;
 }
 
 .modal-backdrop {
     display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: hsla(0, 0%, 0%, 0.5);
 }
 
 .empty {
+    margin-top: 2rem;
     margin-bottom: 2rem;
     color: grey;
 }
@@ -152,12 +161,11 @@ body {
     padding: .7rem 2rem;
     border: var(--border);
     border-radius: var(--radius);
-    transition: .3s background;
+    transition: .3s;
 }
 
 .btn:hover {
     background: #fff;
     cursor: pointer;
     padding: .8rem 4rem;
-    transition: .4s;
 }
