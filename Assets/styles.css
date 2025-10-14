@@ -169,3 +169,21 @@ body {
     cursor: pointer;
     padding: .8rem 4rem;
 }
+
+.form-control input.invalid,
+.form-control textarea.invalid {
+    animation-name: validate;
+    animation-duration: 2s;
+}
+
+@keyframes validate {
+    0% {
+        border: 1px solid var(--red);
+    }
+    50% {
+        border: 1px solid var(--orange);
+    }
+    100% {
+        border: var(--border);
+    }
+}

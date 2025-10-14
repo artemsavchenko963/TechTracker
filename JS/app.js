@@ -2,12 +2,14 @@ const modal = document.querySelector('#modal')
 const content = document.querySelector('#content')
 const backdrop = document.querySelector('#backdrop')
 const progress = document.querySelector('#progress')
+const form = document.querySelector('#form')
 
 const APP_TITLE = document.title
 
 content.addEventListener('click', openCard)
 backdrop.addEventListener('click', closeModal)
 modal.addEventListener('change', toggleTech)
+form.addEventListener('submit', createTech)
 
 const technologies = [
     { title: 'HTML', description: 'HTML text', type: 'html', done: true },
@@ -114,6 +116,40 @@ function toCard(tech) {
             <h3 data-type="${tech.type}">${tech.title}</h3>
         </div>
     `
+}
+
+function isInvalid(title, description) {
+    return !title.value || !description.value
+}
+
+function createTech(event) {
+    event.preventDefault()
+    // const title = event.target.title
+    // const description = event.target.description
+    const {title, description} = event.target
+
+    if (isInvalid(title, description)) {
+        if (!title.value) title.classList.add("invalid")
+        if (!description.value) description.classList.add("invalid")
+        
+            setTimeout(() => {
+                title.classList.remove('invalid')
+                description.classList.remove('invalid')
+            }, 2000)
+        return
+    }
+
+    const newTech = {
+        title: title.value,
+        description: description.value,
+        done: false,
+        type: title.value.toLowerCase()
+    }
+
+    technologies.push(newTech)
+    title.value = ''
+    description.value = ''
+    init()
 }
 
 
