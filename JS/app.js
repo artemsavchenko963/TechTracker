@@ -4,22 +4,15 @@ const backdrop = document.querySelector('#backdrop')
 const progress = document.querySelector('#progress')
 const form = document.querySelector('#form')
 
-const APP_TITLE = document.title
-
 content.addEventListener('click', openCard)
 backdrop.addEventListener('click', closeModal)
 modal.addEventListener('change', toggleTech)
 form.addEventListener('submit', createTech)
 
-const technologies = [
-    { title: 'HTML', description: 'HTML text', type: 'html', done: true },
-    { title: 'CSS', description: 'CSS text', type: 'css', done: true },
-    { title: 'Java Script', description: 'Java Script text', type: 'js', done: false },
-    { title: 'Git', description: 'Git text', type: 'git', done: false },
-    { title: 'React', description: 'React text', type: 'react', done: false },
-]
+const APP_TITLE = document.title
+const LS_KEY = 'MY_TECHS'
 
-console.log(technologies);
+const technologies = getState()
 
 
 function openCard() {
@@ -48,6 +41,7 @@ function toggleTech(event) {
     const tech = technologies.find(t => t.type === type)
     tech.done = event.target.checked
 
+    saveState()
     init()
 }
 
@@ -149,8 +143,15 @@ function createTech(event) {
     technologies.push(newTech)
     title.value = ''
     description.value = ''
+    saveState()
     init()
 }
 
-
+function saveState() {
+    localStorage.setItem(LS_KEY, JSON.stringify(technologies))
+}
+function getState() {
+    const raw = localStorage.getItem(LS_KEY)
+    return raw ? JSON.parse(raw) : []
+}
 init()
